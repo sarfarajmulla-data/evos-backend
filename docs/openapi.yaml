@@ -1,0 +1,45 @@
+openapi: 3.0.3
+info:
+  title: EVOS Backend
+  version: 0.1.0
+  description: Electric vehicle fleet scheduling and sustainability API.
+servers:
+  - url: http://localhost:8000
+paths:
+  /health:
+    get:
+      summary: Process health
+      responses:
+        "200": {description: Healthy process}
+  /ready:
+    get:
+      summary: Readiness
+      responses:
+        "200": {description: Ready for local traffic}
+  /api/v1/fleet/vehicles:
+    get:
+      summary: List fleet vehicles
+      responses:
+        "200": {description: Vehicle collection}
+  /api/v1/scheduler/plan:
+    post:
+      summary: Generate schedules with all supported algorithms
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items: {$ref: "#/components/schemas/SchedulingRequest"}
+      responses:
+        "200": {description: Compared schedule plans}
+components:
+  schemas:
+    SchedulingRequest:
+      type: object
+      required: [vehicle_id, requested_at, estimated_energy_kwh, priority]
+      properties:
+        vehicle_id: {type: string}
+        requested_at: {type: string, format: date-time}
+        estimated_energy_kwh: {type: number, minimum: 0}
+        priority: {type: integer, minimum: 0}
