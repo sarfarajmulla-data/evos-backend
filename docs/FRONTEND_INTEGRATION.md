@@ -1,7 +1,8 @@
 # Frontend Integration Guide
 
 Start the backend with `uvicorn app.main:app --reload` and use
-`http://localhost:8000` as the local API base URL. OpenAPI is available at
+`http://localhost:8000` as the local API base URL. The bundled Vite frontend
+uses `http://localhost:8443` by default. OpenAPI is available at
 `/openapi.json` and interactive docs at `/docs` outside production.
 
 ## Health and datasets

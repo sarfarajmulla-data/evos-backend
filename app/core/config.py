@@ -11,7 +11,11 @@ class Settings(BaseSettings):
     log_level: str = "INFO"
     secret_key: str = "change-me-in-production"
     access_token_expire_minutes: int = 60
-    cors_origins: str = "http://localhost:3000,http://127.0.0.1:3000"
+    cors_origins: str = (
+        "http://localhost:3000,http://127.0.0.1:3000,"
+        "http://localhost:5173,http://127.0.0.1:5173,"
+        "http://localhost:8443,http://127.0.0.1:8443"
+    )
     database_url: str = "sqlite:///./evos.db"
     supabase_url: str = ""
     supabase_anon_key: str = ""
