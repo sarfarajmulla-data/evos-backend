@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import UTC, datetime, timedelta
 
 from app.algorithms.evos_optimizer import EVOSOptimizer
 from app.algorithms.fcfs import FCFS
@@ -20,7 +20,7 @@ class SchedulerService:
         }
 
     def build_demo_plan(self) -> dict:
-        now = datetime.utcnow()
+        now = datetime.now(UTC).replace(tzinfo=None)
         demo_requests = [
             {"vehicle_id": "EV-01", "requested_at": now, "estimated_energy_kwh": 22.5, "priority": 2, "duration_hours": 1.5},
             {"vehicle_id": "EV-02", "requested_at": now + timedelta(hours=1), "estimated_energy_kwh": 18.0, "priority": 4, "duration_hours": 2.0},

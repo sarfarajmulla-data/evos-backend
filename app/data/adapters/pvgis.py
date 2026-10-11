@@ -28,7 +28,7 @@ class PVGISAdapter:
         payload = response.json()
         hourly = payload.get("outputs", {}).get("hourly")
         if not isinstance(hourly, list):
-            raise ValueError("PVGIS response is missing hourly output")
+            raise TypeError("PVGIS response is missing hourly output")
         return {
             "source": "PVGIS",
             "provenance": "IMPORTED_EXTERNAL",

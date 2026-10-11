@@ -7,7 +7,6 @@ from app.main import app
 from app.services.confidence_service import ConfidenceService
 from app.services.simulation_service import SimulationService
 
-
 client = TestClient(app)
 
 

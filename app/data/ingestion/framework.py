@@ -4,10 +4,11 @@ import csv
 import hashlib
 import json
 import uuid
+from collections.abc import Iterable
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from io import TextIOBase
-from typing import Any, Iterable
+from typing import Any
 
 from app.core.provenance import Provenance
 
@@ -44,7 +45,7 @@ class IngestionFramework:
         required_columns: set[str] | None = None,
         provenance: Provenance = Provenance.IMPORTED_EXTERNAL,
     ) -> ImportRecord:
-        started = datetime.now(timezone.utc).isoformat()
+        started = datetime.now(UTC).isoformat()
         result = ImportRecord(
             import_id=str(uuid.uuid4()),
             source=source,
@@ -69,11 +70,11 @@ class IngestionFramework:
                 result.records_accepted += 1
             result.records_persisted = result.records_accepted
             result.status = "SUCCEEDED"
-        except Exception as exc:
+        except Exception as exc:  # noqa: BLE001 - record all ingestion failures
             result.status = "FAILED"
             result.failure_category = "VALIDATION_OR_PERSISTENCE"
             result.error_summary = str(exc)
-        result.ended_at = datetime.now(timezone.utc).isoformat()
+        result.ended_at = datetime.now(UTC).isoformat()
         self._history.append(result)
         return result
 
@@ -98,8 +99,8 @@ class IngestionFramework:
                 import_id=str(uuid.uuid4()),
                 source=source,
                 status="FAILED",
-                started_at=datetime.now(timezone.utc).isoformat(),
-                ended_at=datetime.now(timezone.utc).isoformat(),
+                started_at=datetime.now(UTC).isoformat(),
+                ended_at=datetime.now(UTC).isoformat(),
                 failure_category="RETRIEVAL_OR_PARSE",
                 error_summary=str(exc),
             )

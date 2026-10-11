@@ -1,8 +1,7 @@
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import Any
-
 
 DEFAULT_SCENARIO = {
     "scenario_id": "illustrative-campus",
@@ -59,7 +58,7 @@ class OperationsService:
                 "kind": "RULE_BASED_ALERT",
                 "message": "Battery balancing recommended",
                 "provenance": "CALCULATED",
-                "created_at": datetime.now(timezone.utc).isoformat(),
+                "created_at": datetime.now(UTC).isoformat(),
             }
         ]
 

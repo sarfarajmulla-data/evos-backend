@@ -1,7 +1,15 @@
+from typing import ClassVar
+
+
 class ConfidenceService:
     """Transparent evidence score; this is not a calibrated probability."""
 
-    weights = {"data_quality": 0.30, "model_reliability": 0.25, "constraint_verification": 0.30, "decision_stability": 0.15}
+    weights: ClassVar[dict[str, float]] = {
+        "data_quality": 0.30,
+        "model_reliability": 0.25,
+        "constraint_verification": 0.30,
+        "decision_stability": 0.15,
+    }
 
     def score(
         self,

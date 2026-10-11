@@ -30,7 +30,7 @@ class NASAPowerAdapter:
         payload = response.json()
         parameter = payload.get("properties", {}).get("parameter", {}).get("ALLSKY_SFC_SW_DWN")
         if not isinstance(parameter, dict):
-            raise ValueError("NASA POWER response is missing solar parameter data")
+            raise TypeError("NASA POWER response is missing solar parameter data")
         units = payload.get("parameters", {}).get("ALLSKY_SFC_SW_DWN", {}).get("units")
         return {
             "source": "NASA_POWER",

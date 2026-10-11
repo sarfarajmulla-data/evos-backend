@@ -9,6 +9,6 @@ def normalize_dataset(records: list[dict]) -> list[dict]:
             if key in normalized_row and normalized_row[key] is not None:
                 normalized_row[key] = float(normalized_row[key])
         if "timestamp" in normalized_row and isinstance(normalized_row["timestamp"], str):
-            normalized_row["timestamp"] = datetime.fromisoformat(normalized_row["timestamp"].replace("Z", "+00:00"))
+            normalized_row["timestamp"] = datetime.fromisoformat(normalized_row["timestamp"])
         normalized.append(normalized_row)
     return normalized

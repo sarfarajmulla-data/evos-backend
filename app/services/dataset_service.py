@@ -1,7 +1,7 @@
 from app.data.ingestion.dataset_loader import load_demo_dataset
+from app.data.ingestion.framework import IngestionFramework
 from app.data.transformations.normalize import normalize_dataset
 from app.data.validation.validators import validate_dataset_records
-from app.data.ingestion.framework import IngestionFramework
 from app.services.dataset_registry import dataset_status
 
 
